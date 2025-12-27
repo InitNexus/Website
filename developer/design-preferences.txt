@@ -1,0 +1,21 @@
+Background Colour: #11111b
+Main Body Colour: #181825
+Secondary Body Colour: #1e1e2e
+Bar Colour: #313244
+Card Colour: #39344b
+Menu Colour: #39344b
+Button Colour: #c4a7e7
+Navigation Bar Colour: #1e1e2e
+Footer Colour: #1e1e2e
+Border Colour: #8a77a6
+Header Text Colour: #c4a7e7
+Sub-Header Text Colour:
+Text Colour: #ffffff
+Hyperlink Text Colour: #c4a7e7
+Highlight Colour: #8a77a6
+Scrollbar Colour: #c4a7e7
+
+Icon Colour: #c4a7e7
+Icon Style: Filled, Rounded
+
+Element Width: 98%
