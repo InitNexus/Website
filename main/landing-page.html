@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    background: #11111b;
+    font-family: system-ui, Segoe UI, Roboto, sans-serif;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.navbar {
+    width: 100%;
+    background: #1e1e2e;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 14px 0;
+    position: relative;
+    z-index: 20;
+}
+.nav-icon {
+    cursor: pointer;
+    position: relative;
+}
+.nav-icon img {
+    width: 26px;
+    height: 26px;
+}
+.menu-small {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e1e2e;
+    border: 2px solid #8a77a6;
+    border-radius: 8px;
+    width: 220px;
+    padding: 6px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 30;
+}
+.menu-small a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+.menu-small a:hover {
+    background: #313244;
+}
+.menu-small img {
+    width: 18px;
+    height: 18px;
+}
+.menu-full {
+    position: fixed;
+    inset: 0;
+    background: #11111b;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+.menu-full.open {
+    transform: translateY(0);
+}
+.menu-full-header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu-full-header h3 {
+    color: #c4a7e7;
+}
+.menu-full-header img {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+.menu-full-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.menu-full-content a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: #1e1e2e;
+    border-radius: 8px;
+}
+.menu-full-content a:hover {
+    background: #313244;
+}
+.menu-full-content img {
+    width: 22px;
+    height: 22px;
+}
+.container {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 24px;
+}
+.section {
+    background: #181825;
+    border-radius: 8px;
+    padding: 36px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.section h3 {
+    color: #c4a7e7;
+}
+.section p {
+    opacity: 0.85;
+    text-align: center;
+}
+.hero {
+    position: relative;
+    background: url("https://InitNexus.github.io/Website/assets/media/images/hero-background.png") center / cover no-repeat;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    border-radius: 8px;
+    z-index: 1;
+}
+.hero h3, .hero p, .hero-buttons {
+    position: relative;
+    z-index: 2;
+}
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+}
+.hero-buttons a {
+    padding: 10px 22px;
+    border: 1px solid #c4a7e7;
+    border-radius: 8px;
+    display: inline-block;
+    text-align: center;
+}
+.hero-buttons a:hover {
+    background: #c4a7e7;
+}
+.explore-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+}
+.explore-item {
+    background: #1e1e2e;
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.explore-item:hover {
+    background: #313244;
+}
+.explore-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.explore-item img {
+    width: 20px;
+    height: 20px;
+}
+.cards {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+.card {
+    flex: 1;
+    background: #1e1e2e;
+    border-radius: 8px;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid transparent;
+}
+.card:hover {
+    border: 1px solid #8a77a6;
+}
+.card img {
+    width: 28px;
+    height: 28px;
+}
+.testimonials {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+.testimonial {
+    background: #1e1e2e;
+    border-radius: 8px;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+}
+.testimonial:hover {
+    border: 1px solid #8a77a6;
+}
+.testimonial img {
+    width: 26px;
+    height: 26px;
+}
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+}
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 10px;
+    color: #ffffff;
+}
+.contact-form button {
+    background: #c4a7e7;
+    color: #11111b;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+}
+.icon-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+}
+.icon-row a {
+    display: block;
+}
+.icon-row img {
+    width: 40px;
+    height: 40px;
+}
+.download-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+    width: 100%;
+}
+.download-buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 0;
+    background: #1e1e2e;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+.download-buttons a:hover {
+    background: #313244;
+}
+.download-buttons img {
+    width: 20px;
+    height: 20px;
+}
+.footer {
+    width: 100%;
+    background: #1e1e2e;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.footer-icons {
+    display: flex;
+    gap: 14px;
+}
+.footer-icons a {
+    display: block;
+}
+.footer-icons img {
+    width: 22px;
+    height: 22px;
+}
+@media (max-width: 900px) {
+    .cards { flex-direction: column; }
+    .testimonials { grid-template-columns: 1fr; }
+    .hero { min-height: 260px; padding: 20px; }
+    .hero-buttons { flex-direction: column; width: 100%; gap: 12px; }
+    .hero-buttons a { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <div class="nav-icon" onclick="location.href='#'"><img src="https://InitNexus.github.io/Website/assets/media/icons/home.png"></div>
+    <div class="nav-icon" onclick="location.href='#'"><img src="https://InitNexus.github.io/Website/assets/media/icons/explore.png"></div>
+    <div class="nav-icon" id="thirdIcon" onclick="toggleSmallMenu()">
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/accounts.png">
+        <div class="menu-small" id="smallMenu">
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/account-management.png">Your account</a>
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/account-recovery.png">Recover account</a>
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/sign-up.png">Sign up</a>
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/login.png">Login</a>
+        </div>
+    </div>
+    <div class="nav-icon"><img src="https://InitNexus.github.io/Website/assets/media/icons/settings.png"></div>
+    <div class="nav-icon" onclick="openFullMenu()"><img src="https://InitNexus.github.io/Website/assets/media/icons/menu.png"></div>
+</div>
+
+<div class="container">
+    <div class="section hero">
+        <h3>Welcome to NexusByte</h3>
+        <p>Learn more or read our documentation</p>
+        <div class="hero-buttons">
+            <a href="#">Learn more</a>
+            <a href="#">Documentation</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Explore</h3>
+        <p>Discover our most visited pages</p>
+        <div class="explore-list">
+            <a href="#" class="explore-item"><div class="explore-left"><img src="#">Python Projects</div><img src="#"></a>
+            <a href="#" class="explore-item"><div class="explore-left"><img src="#">Our Instrumentals</div><img src="#"></a>
+            <a href="#" class="explore-item"><div class="explore-left"><img src="#">Development Services</div><img src="#"></a>
+            <a href="#" class="explore-item"><div class="explore-left"><img src="#">Image Tools > AI Generator</div><img src="#"></a>
+            <a href="#" class="explore-item"><div class="explore-left"><img src="#">Settings > Customisation</div><img src="#"></a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Why choose us?</h3>
+        <p>Why we're different from most websites</p>
+        <div class="cards">
+            <div class="card"><img src="#"><h3>Optimized</h3><p>Lightning fast on all devices, even older hardware!</p></div>
+            <div class="card"><img src="#"><h3>Extensive</h3><p>Lots to explore, do, use, download and way more!</p></div>
+            <div class="card"><img src="#"><h3>Frequent</h3><p>We're always updating everything, be gone boredom!</p></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Testimonials</h3>
+        <p>What users think of us</p>
+        <div class="testimonials">
+            <div class="testimonial"><img src="https://InitNexus.github.io/Website/assets/media/icons/none.png"><h3>No User</h3><p>No feedback yet!</p></div>
+            <div class="testimonial"><img src="https://InitNexus.github.io/Website/assets/media/icons/none.png"><h3>No User</h3><p>No feedback yet!</p></div>
+            <div class="testimonial"><img src="https://InitNexus.github.io/Website/assets/media/icons/none.png"><h3>No User</h3><p>No feedback yet!</p></div>
+            <div class="testimonial"><img src="https://InitNexus.github.io/Website/assets/media/icons/none.png"><h3>No User</h3><p>No feedback yet!</p></div>
+            <div class="testimonial"><img src="https://InitNexus.github.io/Website/assets/media/icons/none.png"><h3>No User</h3><p>No feedback yet!</p></div>
+            <div class="testimonial"><img src="https://InitNexus.github.io/Website/assets/media/icons/none.png"><h3>No User</h3><p>No feedback yet!</p></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Contact</h3>
+        <p>Get in contact with us directly</p>
+        <div class="contact-form">
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <textarea rows="4" placeholder="Message"></textarea>
+            <button>Send</button>
+        </div>
+        <h3>Follow Us</h3>
+        <p>Stay up to date on our latest news</p>
+        <div class="icon-row">
+            <a href="#"><img src="#"></a>
+            <a href="#"><img src="#"></a>
+            <a href="#"><img src="#"></a>
+            <a href="#"><img src="#"></a>
+            <a href="#"><img src="#"></a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>NexusByte application</h3>
+        <p>Visit us from home or on the go</p>
+        <div class="download-buttons">
+            <a href="#" download><img src="#">Windows</a>
+            <a href="#" download><img src="#">MacOS</a>
+            <a href="#" download><img src="#">Linux</a>
+            <a href="#" download><img src="#">Android</a>
+            <a href="#" download><img src="#">IOS</a>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <span>© NexusByte Initiative 2025</span>
+    <div class="footer-icons">
+        <a href="#"><img src="#"></a>
+        <a href="#"><img src="#"></a>
+        <a href="#"><img src="#"></a>
+    </div>
+</div>
+
+<div class="menu-full" id="fullMenu">
+    <div class="menu-full-header">
+        <h3>Menu</h3>
+        <img src="#" onclick="closeFullMenu()">
+    </div>
+    <div class="menu-full-content">
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/projects.png">Projects</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/tools.png">Tools</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/downloads.png">Downloads</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/store.png">Store</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/music.png">Music</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/nexusbyte-ai.png">NexusByte AI</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/miscellaneous.png">Miscellaneous</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/information.png">Information</a>
+    </div>
+</div>
+
+<script>
+const smallMenu = document.getElementById("smallMenu");
+const fullMenu = document.getElementById("fullMenu");
+function toggleSmallMenu() {
+    smallMenu.style.display = smallMenu.style.display === "flex" ? "none" : "flex";
+}
+function openFullMenu() {
+    fullMenu.classList.add("open");
+}
+function closeFullMenu() {
+    fullMenu.classList.remove("open");
+}
+</script>
+
+</body>
+</html>
