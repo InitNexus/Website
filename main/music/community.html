@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music • Community</title>
+
+<link rel="icon" href="#">
+<link rel="stylesheet" href="#">
+<script src="#"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #11111b;
+    font-family: system-ui, Segoe UI, Roboto, sans-serif;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar {
+    width: 100%;
+    background: #1e1e2e;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 14px 0;
+    position: relative;
+    z-index: 20;
+}
+
+.nav-icon {
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-icon img {
+    width: 26px;
+    height: 26px;
+}
+
+.menu-small {
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e1e2e;
+    border: 2px solid #8a77a6;
+    border-radius: 8px;
+    width: 220px;
+    padding: 6px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 30;
+}
+
+.menu-small a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu-small a:hover {
+    background: #313244;
+}
+
+.menu-small img {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-full {
+    position: fixed;
+    inset: 0;
+    background: #11111b;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-full.open {
+    transform: translateY(0);
+}
+
+.menu-full-header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-full-header h3 {
+    color: #c4a7e7;
+}
+
+.menu-full-header img {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.menu-full-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-full-content a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: #1e1e2e;
+    border-radius: 8px;
+}
+
+.menu-full-content a:hover {
+    background: #313244;
+}
+
+.menu-full-content img {
+    width: 22px;
+    height: 22px;
+}
+
+.page-spacer {
+    flex: 1;
+}
+
+.footer {
+    width: 100%;
+    background: #1e1e2e;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 14px;
+}
+
+.footer-icons img {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 0;
+    }
+
+    .nav-icon img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .menu-small {
+        width: 200px;
+    }
+
+    .menu-full-header {
+        padding: 16px;
+    }
+
+    .menu-full-content {
+        padding: 16px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-full-content a {
+        padding: 12px;
+    }
+
+    .menu-full-content img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .footer-icons img {
+        width: 20px;
+        height: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="nav-icon" onclick="location.href='https://InitNexus.github.io/Website/main/landing-page.html'">
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/home.png">
+    </div>
+
+    <div class="nav-icon" onclick="location.href='https://InitNexus.github.io/Website/main/explore.html'">
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/explore.png">
+    </div>
+
+    <div class="nav-icon" onclick="toggleSmallMenu()">
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/accounts.png">
+        <div class="menu-small" id="smallMenu">
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/account-management.png">Your account</a>
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/account-recovery.png">Recover account</a>
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/sign-up.png">Sign up</a>
+            <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/login.png">Login</a>
+        </div>
+    </div>
+
+    <div class="nav-icon" onclick="location.href='https://InitNexus.github.io/Website/main/settings/general.html'">
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/settings.png">
+    </div>
+
+    <div class="nav-icon" onclick="openFullMenu()">
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/menu.png">
+    </div>
+</div>
+
+<div class="page-spacer"></div>
+
+<div class="footer">
+    <span>© NexusByte Initiative 2025</span>
+    <div class="footer-icons">
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/social-media/facebook.png"></a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/social-media/instagram.png"></a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/social-media/youtube.png"></a>
+    </div>
+</div>
+
+<div class="menu-full" id="fullMenu">
+    <div class="menu-full-header">
+        <h3>Menu</h3>
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/close.png" onclick="closeFullMenu()">
+    </div>
+    <div class="menu-full-content">
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/projects.png">Projects</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/tools.png">Tools</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/downloads.png">Downloads</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/store.png">Store</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/music.png">Music</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/nexusbyte-ai.png">NexusByte AI</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/miscellaneous.png">Miscellaneous</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/information.png">Information</a>
+    </div>
+</div>
+
+<script>
+const smallMenu = document.getElementById("smallMenu");
+const fullMenu = document.getElementById("fullMenu");
+
+function toggleSmallMenu() {
+    smallMenu.style.display = smallMenu.style.display === "flex" ? "none" : "flex";
+}
+
+function openFullMenu() {
+    fullMenu.classList.add("open");
+}
+
+function closeFullMenu() {
+    fullMenu.classList.remove("open");
+}
+</script>
+
+</body>
+</html>
