@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore</title>
+
+<link rel="icon" href="#">
+<link rel="stylesheet" href="#">
+<script src="#"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #11111b;
+    font-family: system-ui, Segoe UI, Roboto, sans-serif;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar {
+    width: 100%;
+    background: #1e1e2e;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 14px 0;
+    z-index: 20;
+}
+
+.nav-icon {
+    cursor: pointer;
+}
+
+.nav-icon img {
+    width: 26px;
+    height: 26px;
+}
+
+.input-wrapper {
+    width: 98%;
+    margin: 16px auto 0;
+    position: relative;
+}
+
+.input-bar {
+    width: 100%;
+    background: #1e1e2e;
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.85;
+}
+
+.input-left img,
+.input-right img {
+    width: 20px;
+    height: 20px;
+}
+
+.input-right {
+    cursor: pointer;
+}
+
+.input-menu {
+    width: 100%;
+    background: #1e1e2e;
+    border: 2px solid #8a77a6;
+    border-radius: 8px;
+    margin-top: 8px;
+    display: none;
+    flex-direction: column;
+    padding: 6px;
+    gap: 4px;
+}
+
+.input-menu label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.input-menu label:hover {
+    background: #313244;
+}
+
+.input-menu input {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid #8a77a6;
+    cursor: pointer;
+}
+
+.input-menu input:checked {
+    background: #8a77a6;
+}
+
+.list {
+    width: 98%;
+    margin: 24px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.list-item {
+    background: #181825;
+    border-radius: 8px;
+    padding: 24px 16px;
+    text-align: center;
+}
+
+.list-item h3 {
+    color: #c4a7e7;
+    margin-bottom: 4px;
+}
+
+.list-item p {
+    opacity: 0.85;
+}
+
+.footer {
+    width: 100%;
+    background: #1e1e2e;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 14px;
+}
+
+.footer-icons img {
+    width: 22px;
+    height: 22px;
+}
+
+.menu-full {
+    position: fixed;
+    inset: 0;
+    background: #11111b;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-full.open {
+    transform: translateY(0);
+}
+
+.menu-full-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-full-header h3 {
+    color: #c4a7e7;
+}
+
+.menu-full-header img {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.menu-full-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-full-content a {
+    background: #1e1e2e;
+    padding: 14px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.menu-full-content a:hover {
+    background: #313244;
+}
+
+.menu-full-content img {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 0;
+    }
+    .nav-icon img {
+        width: 22px;
+        height: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="nav-icon" onclick="location.href='https://InitNexus.github.io/Website/main/landing-page.html'"><img src="https://InitNexus.github.io/Website/assets/media/icons/home.png"></div>
+    <div class="nav-icon" onclick="location.href='https://InitNexus.github.io/Website/main/explore.html'"><img src="https://InitNexus.github.io/Website/assets/media/icons/explore.png"></div>
+    <div class="nav-icon"><img src="https://InitNexus.github.io/Website/assets/media/icons/accounts.png"></div>
+    <div class="nav-icon" onclick="location.href='https://InitNexus.github.io/Website/main/settings/general.html'"><img src="https://InitNexus.github.io/Website/assets/media/icons/settings.png"></div>
+    <div class="nav-icon" onclick="openFullMenu()"><img src="https://InitNexus.github.io/Website/assets/media/icons/menu.png"></div>
+</div>
+
+<div class="input-wrapper">
+    <div class="input-bar">
+        <div class="input-left">
+            <img src="https://InitNexus.github.io/Website/assets/media/icons/search.png">
+            <span>Search the website...</span>
+        </div>
+        <div class="input-right" onclick="toggleInputMenu()">
+            <img src="https://InitNexus.github.io/Website/assets/media/icons/filters.png">
+        </div>
+    </div>
+
+    <div class="input-menu" id="inputMenu">
+        <label>Advanced search <input type="checkbox"></label>
+        <label>Include media <input type="checkbox"></label>
+        <label>Find new content <input type="checkbox"></label>
+        <label>Find old content <input type="checkbox"></label>
+    </div>
+</div>
+
+<div class="list">
+    <div class="list-item"><h3>Projects</h3><p>Browse all of our public projects</p></div>
+    <div class="list-item"><h3>Tools</h3><p>Explore the wide range of tools we offer</p></div>
+    <div class="list-item"><h3>Downloads</h3><p>Find content for all platforms</p></div>
+    <div class="list-item"><h3>Store</h3><p>An extensive store with many products</p></div>
+    <div class="list-item"><h3>Music</h3><p>Stream our music or browse trending releases</p></div>
+    <div class="list-item"><h3>NexusByte AI</h3><p>A decentralized AI for all purposes</p></div>
+    <div class="list-item"><h3>Miscellaneous</h3><p>Pages that don't fit into specific categories</p></div>
+    <div class="list-item"><h3>Information</h3><p>Information about us, documentation and more</p></div>
+</div>
+
+<div class="footer">
+    <span>© NexusByte Initiative 2025</span>
+    <div class="footer-icons">
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/social-media/facebook.png"></a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/social-media/instagram.png"></a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/social-media/youtube.png"></a>
+    </div>
+</div>
+
+<div class="menu-full" id="fullMenu">
+    <div class="menu-full-header">
+        <h3>Menu</h3>
+        <img src="https://InitNexus.github.io/Website/assets/media/icons/close.png" onclick="closeFullMenu()">
+    </div>
+    <div class="menu-full-content">
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/projects.png">Projects</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/tools.png">Tools</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/downloads.png">Downloads</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/store.png">Store</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/music.png">Music</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/nexusbyte-ai.png">NexusByte AI</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/miscellaneous.png">Miscellaneous</a>
+        <a href="#"><img src="https://InitNexus.github.io/Website/assets/media/icons/information.png">Information</a>
+    </div>
+</div>
+
+<script>
+const inputMenu = document.getElementById("inputMenu");
+const fullMenu = document.getElementById("fullMenu");
+
+function toggleInputMenu() {
+    inputMenu.style.display = inputMenu.style.display === "flex" ? "none" : "flex";
+}
+
+function openFullMenu() {
+    fullMenu.classList.add("open");
+}
+
+function closeFullMenu() {
+    fullMenu.classList.remove("open");
+}
+</script>
+
+</body>
+</html>
