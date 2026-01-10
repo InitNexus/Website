@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incomplete Page</title>
+    
+    <link rel="icon" href="https://initnexus.github.io/Website/assets/media/branding/logo.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #11111B;
+            color: #FFFFFF;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content {
+            width: 98%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .content img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+        }
+
+        .content h1 {
+            color: #4C4861;
+            font-size: 22px;
+        }
+
+        .content p {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .actions {
+            margin-top: 18px;
+            width: 100%;
+            display: flex;
+            gap: 12px;
+        }
+
+        .actions a {
+            flex: 1;
+            text-decoration: none;
+        }
+
+        .actions button {
+            width: 100%;
+            background: #4C4861;
+            color: #FFFFFF;
+            border: 1px solid #4C4861;
+            border-radius: 8px;
+            padding: 12px 0;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .actions button:hover {
+            background: #635A7A;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 600px) {
+            ::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <img src="https://initnexus.github.io/Website/assets/media/icons/incomplete-page.png" alt="Icon">
+
+        <h1>Incomplete Page</h1>
+
+        <p>
+            This page is incomplete, please come back soon. Meanwhile, you can browse the rest of the website or visit our GitHub.
+        </p>
+
+        <div class="actions">
+            <a href="https://initnexus.github.io/Website/main/home.html" target="_blank">
+                <button>Go to home</button>
+            </a>
+            <a href="https://github.com/initnexus" target="_blank">
+                <button>Our GitHub</button>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
