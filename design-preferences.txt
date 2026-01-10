@@ -1,0 +1,47 @@
+Please refer to these preferences when creating new pages or updating existing content (for developers and contributors to follow).
+
+GENERAL COLOURS
+• #11111B
+• #181825
+• #1E1E2E
+• #313244
+• #2E3040
+• #C4A7E7
+• #7F859B
+• #B49AD5
+
+LIGHT MODE
+This theme doesn't exist yet!
+
+DARK MODE (DEFAULT THEME)
+• Background Colour:
+• Main Body Colour:
+• Secondary Body Colour:
+• Navigation Bar Colour:
+• Footer Colour:
+• Bar Colour:
+• Input Bar Colour:
+• Card Colour:
+• Button Colour:
+• Border Colour:
+• Highlight Colour:
+• Scrollbar Colour:
+• Header Text Colour:
+• Sub-Header Text Colour:
+• Text Colour:
+• Hyperlink Text Colour:
+• Icon Colour:
+
+MIDNIGHT MODE
+This theme doesn't exist yet!
+
+AMOLED MODE
+This theme doesn't exist yet!
+
+
+
+• Element Width: 98% (even on smaller screens)
+• Element corner radius: 8PX
+• Responsive styling included in all pages
+• Default highlighting disabled by default
+• Scrollbar invisible on smaller screens (for improved and clean user experience)
