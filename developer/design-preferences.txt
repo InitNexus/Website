@@ -14,29 +14,37 @@ LIGHT MODE
 This theme doesn't exist yet!
 
 DARK MODE (DEFAULT THEME)
-• Background Colour:
-• Main Body Colour:
-• Secondary Body Colour:
-• Navigation Bar Colour:
-• Footer Colour:
-• Bar Colour:
-• Input Bar Colour:
-• Card Colour:
-• Button Colour:
-• Border Colour:
-• Highlight Colour:
-• Scrollbar Colour:
-• Header Text Colour:
-• Sub-Header Text Colour:
-• Text Colour:
-• Hyperlink Text Colour:
-• Icon Colour:
+• Background Colour: #11111B
+• Main Body Colour: #1B1B29
+• Secondary Body Colour: #1F1F2F
+• Navigation Bar Colour: #1B1B29
+• Footer Colour: #1B1B29
+• Bar Colour: #1C1C2B
+• Input Bar Colour: #1C1C2B
+• Card Colour: #1C1C2C
+• Menu Colour: #14141F
+• Button Colour: #4C4861
+• Border Colour: #4C4861
+• Highlight Colour: #635A7A
+• Scrollbar Colour: #4C4861
+• Header Text Colour: #4C4861
+• Sub-Header Text Colour: #4C4861
+• Text Colour: #FFFFFF
+• Hyperlink Text Colour: #635A7A
+• Icon Colour: #9F89BD
 
 MIDNIGHT MODE
-This theme doesn't exist yet!
+Same as the default dark theme but all colours are 25% darker.
 
 AMOLED MODE
-This theme doesn't exist yet!
+Mostly black except for:
+• Navigation Bar
+• Footer
+• Cards
+• Buttons
+• All Text
+• Menus
+• Borders
 
 
 
