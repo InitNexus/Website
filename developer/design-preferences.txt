@@ -4,27 +4,27 @@ LIGHT THEME
 A light theme hasn't been implemented yet, the dark theme is default
 
 DARK THEME
-• Background Colour:
-• Main Body Colour:
-• Navigation Bar Colour:
-• Footer Colour:
-• Secondary Body Colour:
-• Bar Colour:
-• Input Bar Colour:
-• Card Colour:
-• Menu Colour:
-• Dropdown Menu Colour:
-• Context Menu Colour:
-• Header Text Colour:
-• SubHeader Text Colour
-• Bold Text Colour:
-• Regular Text Colour:
-• FinePrint Text Colour:
-• Hyperlink Text Colour
-• Highlight Area Colour:
-• Scrollbar:
+• Background Colour: #0A0A0A
+• Main Body Colour: #262626
+• Secondary Body Colour: #262626
+• Navigation Bar Colour: #262626
+• Footer Colour: #262626
+• Bar Colour: #444444
+• Input Bar Colour: #444444
+• Card Colour: #444444
+• Menu Colour: #2C2C2C
+• Dropdown Menu Colour: #2C2C2C
+• Context Menu Colour: #2C2C2C
+• Header Text Colour: #C493FF
+• SubHeader Text Colour: #C6C6C6
+• Bold Text Colour: #DADADA
+• Regular Text Colour: #FFFFFF
+• FinePrint Text Colour: #9E9E9E
+• Hyperlink Text Colour: #C493FF
+• Highlight Area Colour: #444444
+• Scrollbar: #C493FF
 
-• Icon Colour:
+• Icon Colour: #C493FF
 • Icon Style: Rounded, Filled
 
 • Elements Corner Radius: 12PX
