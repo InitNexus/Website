@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preferences</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+        }
+
+        a {
+            color: #C493FF;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C493FF;
+            border-radius: 12px;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .body {
+            width: 97%;
+            margin: 0 auto;
+            background: #262626;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .body.bottom {
+            margin-top: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .title {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .title img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        .title strong {
+            color: #DADADA;
+            font-size: 16px;
+        }
+
+        .close img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .text {
+            color: #C6C6C6;
+            font-size: 14px;
+            max-width: 97%;
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 97%;
+        }
+
+        .row.split {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            width: 97%;
+        }
+
+        .btn {
+            background: #444444;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn.outline {
+            background: transparent;
+            border: 1px solid #C493FF;
+            color: #C493FF;
+        }
+
+        @media (max-width: 768px) {
+            .row.split {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="body">
+            <div class="header">
+                <div class="title">
+                    <img src="https://initnexus.github.io/Website/assets/media/icons/language.png">
+                    <strong>Language Preferences</strong>
+                </div>
+            </div>
+
+            <div class="text">
+                Choose your preferred language.
+            </div>
+
+            <div class="row split">
+                <div class="buttons">
+                    <button class="btn">English</button>
+                    <button class="btn">French</button>
+                    <button class="btn">Spanish</button>
+                    <button class="btn">German</button>
+                    <button class="btn">Russian</button>
+                    <button class="btn">Japanese</button>
+                </div>
+
+                <div>
+                    <button class="btn outline">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="header">
+                <div class="title">
+                    <img src="https://initnexus.github.io/Website/assets/media/icons/analytics.png">
+                    <strong>Analytics & Tracking</strong>
+                </div>
+            </div>
+
+            <div class="text">
+                We log data such as when you visited our website, the duration of usage, and when you closed out of it. Do you consent to this?
+            </div>
+
+            <div class="buttons">
+                <button class="btn">Yes</button>
+                <button class="btn">No</button>
+            </div>
+        </div>
+
+        <div class="body bottom" id="cookieBody">
+            <div class="header">
+                <div class="title">
+                    <img src="https://initnexus.github.io/Website/assets/media/icons/cookies.png">
+                    <strong>Cookie Preferences</strong>
+                </div>
+
+                <div class="close">
+                    <img src="https://initnexus.github.io/Website/assets/media/icons/close.png" id="closeCookie">
+                </div>
+            </div>
+
+            <div class="text">
+                We use cookies for faster loading times, enhanced user experience, and general analytics collection. Do you consent to the use of cookies?
+            </div>
+
+            <div class="buttons">
+                <button class="btn">Accept</button>
+                <button class="btn">Reject</button>
+                <button class="btn">Customize</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('closeCookie').addEventListener('click', () => {
+            document.getElementById('cookieBody').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
