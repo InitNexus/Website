@@ -28,6 +28,9 @@ DARK THEME
 • Icon Style: Rounded, Filled
 
 • Elements Corner Radius: 12PX
+• Element Width: 97%
 • Responsive Styling: Include in all pages
 • Default Highlighting: Disabled by default for an improved user experience
 • All pages contain single file code
+• Paths for external files are empty or replaced with "#" until linked to a file
+• PNG's are to be used for icons
