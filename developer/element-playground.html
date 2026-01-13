@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Element Playground</title>
+
+<style>
+:root {
+    --bg: #0E0E0E;
+    --body: #141414;
+    --body-2: #1A1A1A;
+    --panel: rgba(22,22,22,0.75);
+    --border: #2A2A2A;
+    --accent: #3A3A3A;
+    --text: #FFFFFF;
+    --muted: #A0A0A0;
+    --glass: blur(18px);
+}
+
+[data-theme="light"] {
+    --bg: #F2F2F2;
+    --body: #FFFFFF;
+    --body-2: #EAEAEA;
+    --panel: rgba(255,255,255,0.8);
+    --border: #CFCFCF;
+    --accent: #B0B0B0;
+    --text: #0A0A0A;
+    --muted: #555555;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: var(--text);
+    text-decoration: underline;
+}
+
+::selection {
+    background: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 8px;
+}
+
+.page {
+    width: 98%;
+    margin: auto;
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.glass {
+    background: var(--panel);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    margin: 0 0 12px 0;
+}
+
+p {
+    margin: 6px 0;
+    color: var(--muted);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--accent);
+    color: var(--text);
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn.outline {
+    background: transparent;
+}
+
+.btn.ghost {
+    background: transparent;
+    border-color: transparent;
+}
+
+.btn.round {
+    border-radius: 999px;
+}
+
+.btn.square {
+    border-radius: 0;
+}
+
+.btn.small {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.btn.large {
+    padding: 16px 26px;
+    font-size: 18px;
+}
+
+.btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--body-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.toggle {
+    width: 54px;
+    height: 28px;
+    background: var(--border);
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+}
+
+.toggle::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: var(--text);
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: 0.3s;
+}
+
+.toggle.active::after {
+    left: 29px;
+}
+
+.dropdown {
+    position: relative;
+    z-index: 9999;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 240px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: 0.3s;
+    z-index: 99999;
+}
+
+.dropdown.open .dropdown-content {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.slide {
+    position: fixed;
+    background: var(--panel);
+    backdrop-filter: var(--glass);
+    border: 1px solid var(--border);
+    transition: 0.4s;
+    z-index: 9000;
+}
+
+.left {
+    top: 0;
+    left: -320px;
+    width: 300px;
+    height: 100%;
+}
+
+.left.open {
+    left: 0;
+}
+
+.top {
+    top: -220px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+}
+
+.top.open {
+    top: 0;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+    .page {
+        padding: 16px 0;
+    }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body data-theme="dark">
+
+<div class="slide left glass" id="menuLeft">
+    <h3>Left Menu</h3>
+    <p>Navigation Item</p>
+    <p>Navigation Item</p>
+</div>
+
+<div class="slide top glass" id="menuTop">
+    <h3>Top Menu</h3>
+    <p>Quick Actions</p>
+</div>
+
+<div class="page">
+
+<div class="glass">
+    <h1>Element Background</h1>
+    <p>Headers, sub headers, body text and <a href="#">hyperlinks</a></p>
+</div>
+
+<div class="glass row">
+    <button class="btn small">Small</button>
+    <button class="btn">Default</button>
+    <button class="btn large">Large</button>
+    <button class="btn outline">Outline</button>
+    <button class="btn ghost">Ghost</button>
+    <button class="btn round">Round</button>
+    <button class="btn square">Square</button>
+</div>
+
+<div class="glass row">
+    <button class="btn" onclick="toggleMenu('menuLeft')">Left Menu</button>
+    <button class="btn" onclick="toggleMenu('menuTop')">Top Menu</button>
+    <button class="btn" onclick="toggleTheme()">Light / Dark</button>
+</div>
+
+<div class="glass dropdown" id="dropdown">
+    <button class="btn" onclick="toggleDropdown()">Dropdown</button>
+    <div class="dropdown-content glass">
+        <p>Dropdown Item</p>
+        <p>Dropdown Item</p>
+        <p>Dropdown Item</p>
+    </div>
+</div>
+
+<div class="glass card-grid">
+    <div class="glass card">
+        <h3>Card</h3>
+        <p>Sub-body text</p>
+    </div>
+    <div class="glass card">
+        <h3>Card</h3>
+        <p>Sub-body text</p>
+    </div>
+    <div class="glass card">
+        <h3>Card</h3>
+        <p>Sub-body text</p>
+    </div>
+</div>
+
+<div class="glass">
+    <h3>Inputs</h3>
+    <div class="row">
+        <input placeholder="Text input">
+        <select>
+            <option>Option</option>
+            <option>Option</option>
+        </select>
+        <div class="toggle" onclick="this.classList.toggle('active')"></div>
+    </div>
+</div>
+
+</div>
+
+<script>
+function toggleMenu(id) {
+    document.getElementById(id).classList.toggle('open')
+}
+function toggleDropdown() {
+    document.getElementById('dropdown').classList.toggle('open')
+}
+function toggleTheme() {
+    document.body.dataset.theme =
+        document.body.dataset.theme === 'dark' ? 'light' : 'dark'
+}
+</script>
+
+</body>
+</html>
