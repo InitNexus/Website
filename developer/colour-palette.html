@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colour Palette</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    background: #0A0A0A;
+    font-family: system-ui, sans-serif;
+    color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6A6A6A;
+    border-radius: 8px;
+}
+
+.main {
+    width: 98%;
+    max-width: 1200px;
+    margin: 32px auto;
+    background: #121212;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sub {
+    background: #161616;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.55);
+}
+
+.hex {
+    color: #FF3B3B;
+    font-weight: 600;
+}
+
+.copy {
+    background: transparent;
+    border: 1px solid #FF3B3B;
+    color: #FF3B3B;
+    padding: 6px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.copy:hover {
+    background: rgba(255,59,59,0.15);
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="sub">
+<div class="bar" style="background:#000000"><span class="hex">#000000</span><button class="copy" onclick="copyHex('#000000')">Copy</button></div>
+<div class="bar" style="background:#050505"><span class="hex">#050505</span><button class="copy" onclick="copyHex('#050505')">Copy</button></div>
+<div class="bar" style="background:#0A0A0A"><span class="hex">#0A0A0A</span><button class="copy" onclick="copyHex('#0A0A0A')">Copy</button></div>
+<div class="bar" style="background:#0F0F0F"><span class="hex">#0F0F0F</span><button class="copy" onclick="copyHex('#0F0F0F')">Copy</button></div>
+<div class="bar" style="background:#141414"><span class="hex">#141414</span><button class="copy" onclick="copyHex('#141414')">Copy</button></div>
+<div class="bar" style="background:#1A1A1A"><span class="hex">#1A1A1A</span><button class="copy" onclick="copyHex('#1A1A1A')">Copy</button></div>
+<div class="bar" style="background:#202020"><span class="hex">#202020</span><button class="copy" onclick="copyHex('#202020')">Copy</button></div>
+<div class="bar" style="background:#262626"><span class="hex">#262626</span><button class="copy" onclick="copyHex('#262626')">Copy</button></div>
+<div class="bar" style="background:#2C2C2C"><span class="hex">#2C2C2C</span><button class="copy" onclick="copyHex('#2C2C2C')">Copy</button></div>
+<div class="bar" style="background:#323232"><span class="hex">#323232</span><button class="copy" onclick="copyHex('#323232')">Copy</button></div>
+<div class="bar" style="background:#383838"><span class="hex">#383838</span><button class="copy" onclick="copyHex('#383838')">Copy</button></div>
+<div class="bar" style="background:#3E3E3E"><span class="hex">#3E3E3E</span><button class="copy" onclick="copyHex('#3E3E3E')">Copy</button></div>
+<div class="bar" style="background:#444444"><span class="hex">#444444</span><button class="copy" onclick="copyHex('#444444')">Copy</button></div>
+<div class="bar" style="background:#4A4A4A"><span class="hex">#4A4A4A</span><button class="copy" onclick="copyHex('#4A4A4A')">Copy</button></div>
+<div class="bar" style="background:#505050"><span class="hex">#505050</span><button class="copy" onclick="copyHex('#505050')">Copy</button></div>
+<div class="bar" style="background:#565656"><span class="hex">#565656</span><button class="copy" onclick="copyHex('#565656')">Copy</button></div>
+<div class="bar" style="background:#5C5C5C"><span class="hex">#5C5C5C</span><button class="copy" onclick="copyHex('#5C5C5C')">Copy</button></div>
+<div class="bar" style="background:#626262"><span class="hex">#626262</span><button class="copy" onclick="copyHex('#626262')">Copy</button></div>
+<div class="bar" style="background:#686868"><span class="hex">#686868</span><button class="copy" onclick="copyHex('#686868')">Copy</button></div>
+<div class="bar" style="background:#6E6E6E"><span class="hex">#6E6E6E</span><button class="copy" onclick="copyHex('#6E6E6E')">Copy</button></div>
+<div class="bar" style="background:#747474"><span class="hex">#747474</span><button class="copy" onclick="copyHex('#747474')">Copy</button></div>
+<div class="bar" style="background:#7A7A7A"><span class="hex">#7A7A7A</span><button class="copy" onclick="copyHex('#7A7A7A')">Copy</button></div>
+<div class="bar" style="background:#808080"><span class="hex">#808080</span><button class="copy" onclick="copyHex('#808080')">Copy</button></div>
+<div class="bar" style="background:#8A8A8A"><span class="hex">#8A8A8A</span><button class="copy" onclick="copyHex('#8A8A8A')">Copy</button></div>
+<div class="bar" style="background:#949494"><span class="hex">#949494</span><button class="copy" onclick="copyHex('#949494')">Copy</button></div>
+<div class="bar" style="background:#9E9E9E"><span class="hex">#9E9E9E</span><button class="copy" onclick="copyHex('#9E9E9E')">Copy</button></div>
+<div class="bar" style="background:#A8A8A8"><span class="hex">#A8A8A8</span><button class="copy" onclick="copyHex('#A8A8A8')">Copy</button></div>
+<div class="bar" style="background:#B2B2B2"><span class="hex">#B2B2B2</span><button class="copy" onclick="copyHex('#B2B2B2')">Copy</button></div>
+<div class="bar" style="background:#BCBCBC"><span class="hex">#BCBCBC</span><button class="copy" onclick="copyHex('#BCBCBC')">Copy</button></div>
+<div class="bar" style="background:#C6C6C6"><span class="hex">#C6C6C6</span><button class="copy" onclick="copyHex('#C6C6C6')">Copy</button></div>
+<div class="bar" style="background:#D0D0D0"><span class="hex">#D0D0D0</span><button class="copy" onclick="copyHex('#D0D0D0')">Copy</button></div>
+<div class="bar" style="background:#DADADA"><span class="hex">#DADADA</span><button class="copy" onclick="copyHex('#DADADA')">Copy</button></div>
+<div class="bar" style="background:#E4E4E4"><span class="hex">#E4E4E4</span><button class="copy" onclick="copyHex('#E4E4E4')">Copy</button></div>
+<div class="bar" style="background:#EEEEEE"><span class="hex">#EEEEEE</span><button class="copy" onclick="copyHex('#EEEEEE')">Copy</button></div>
+<div class="bar" style="background:#FFFFFF"><span class="hex">#FFFFFF</span><button class="copy" onclick="copyHex('#FFFFFF')">Copy</button></div>
+</div>
+
+<div class="sub">
+<div class="bar" style="background:#F7EDFF"><span class="hex">#F7EDFF</span><button class="copy" onclick="copyHex('#F7EDFF')">Copy</button></div>
+<div class="bar" style="background:#EEDCFF"><span class="hex">#EEDCFF</span><button class="copy" onclick="copyHex('#EEDCFF')">Copy</button></div>
+<div class="bar" style="background:#E4CAFF"><span class="hex">#E4CAFF</span><button class="copy" onclick="copyHex('#E4CAFF')">Copy</button></div>
+<div class="bar" style="background:#DAB8FF"><span class="hex">#DAB8FF</span><button class="copy" onclick="copyHex('#DAB8FF')">Copy</button></div>
+<div class="bar" style="background:#CFA5FF"><span class="hex">#CFA5FF</span><button class="copy" onclick="copyHex('#CFA5FF')">Copy</button></div>
+<div class="bar" style="background:#C493FF"><span class="hex">#C493FF</span><button class="copy" onclick="copyHex('#C493FF')">Copy</button></div>
+<div class="bar" style="background:#B980FF"><span class="hex">#B980FF</span><button class="copy" onclick="copyHex('#B980FF')">Copy</button></div>
+<div class="bar" style="background:#AD6CFF"><span class="hex">#AD6CFF</span><button class="copy" onclick="copyHex('#AD6CFF')">Copy</button></div>
+<div class="bar" style="background:#A158FF"><span class="hex">#A158FF</span><button class="copy" onclick="copyHex('#A158FF')">Copy</button></div>
+<div class="bar" style="background:#9544FF"><span class="hex">#9544FF</span><button class="copy" onclick="copyHex('#9544FF')">Copy</button></div>
+<div class="bar" style="background:#8830FF"><span class="hex">#8830FF</span><button class="copy" onclick="copyHex('#8830FF')">Copy</button></div>
+<div class="bar" style="background:#7A1CFF"><span class="hex">#7A1CFF</span><button class="copy" onclick="copyHex('#7A1CFF')">Copy</button></div>
+<div class="bar" style="background:#6C16E0"><span class="hex">#6C16E0</span><button class="copy" onclick="copyHex('#6C16E0')">Copy</button></div>
+<div class="bar" style="background:#5E14C2"><span class="hex">#5E14C2</span><button class="copy" onclick="copyHex('#5E14C2')">Copy</button></div>
+<div class="bar" style="background:#5012A3"><span class="hex">#5012A3</span><button class="copy" onclick="copyHex('#5012A3')">Copy</button></div>
+<div class="bar" style="background:#421085"><span class="hex">#421085</span><button class="copy" onclick="copyHex('#421085')">Copy</button></div>
+<div class="bar" style="background:#340D66"><span class="hex">#340D66</span><button class="copy" onclick="copyHex('#340D66')">Copy</button></div>
+<div class="bar" style="background:#260B48"><span class="hex">#260B48</span><button class="copy" onclick="copyHex('#260B48')">Copy</button></div>
+<div class="bar" style="background:#180829"><span class="hex">#180829</span><button class="copy" onclick="copyHex('#180829')">Copy</button></div>
+<div class="bar" style="background:#0B0514"><span class="hex">#0B0514</span><button class="copy" onclick="copyHex('#0B0514')">Copy</button></div>
+</div>
+
+</div>
+
+<script>
+function copyHex(hex) {
+    navigator.clipboard.writeText(hex)
+}
+</script>
+
+</body>
+</html>
