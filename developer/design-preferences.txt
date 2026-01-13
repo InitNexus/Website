@@ -1,0 +1,33 @@
+These are design preferences that apply to all pages of the website. Intended for devlopers and contributors working on the website.
+
+LIGHT THEME
+A light theme hasn't been implemented yet, the dark theme is default
+
+DARK THEME
+• Background Colour:
+• Main Body Colour:
+• Navigation Bar Colour:
+• Footer Colour:
+• Secondary Body Colour:
+• Bar Colour:
+• Input Bar Colour:
+• Card Colour:
+• Menu Colour:
+• Dropdown Menu Colour:
+• Context Menu Colour:
+• Header Text Colour:
+• SubHeader Text Colour
+• Bold Text Colour:
+• Regular Text Colour:
+• FinePrint Text Colour:
+• Hyperlink Text Colour
+• Highlight Area Colour:
+• Scrollbar:
+
+• Icon Colour:
+• Icon Style: Rounded, Filled
+
+• Elements Corner Radius: 12PX
+• Responsive Styling: Include in all pages
+• Default Highlighting: Disabled by default for an improved user experience
+• All pages contain single file code
