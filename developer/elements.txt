@@ -1,27 +1,72 @@
-BackgroundSolidColour
-BackgroundGradientColour
-BackgroundImage
-BackgroundVideo
-MainBody
-SecondaryBody
-Bar
-InputBar
-Menu
-DropdownMenu
-Card
-FilledButton
-OutlinedButton
-Border
-Shadow
-HighlightArea
-HeaderText
-SubHeaderText
-Text
-SmallText
-HighlightedText
-HyperlinkedText
-Icon
-Image
-Video
-Audio
-Document
+BACKGROUND
+• SolidColour
+• GradientColour
+• Image
+• Video
+
+BODIES
+• MainBody
+• SecondaryBody
+• SubBody
+
+BARS
+• TopBar
+• BottomBar
+• LeftBar
+• RightBar
+• InputBar
+
+CARDS
+• ImageCard
+• InformationCard
+• ImageAndInformationCard
+• InteractiveCard
+• InteractiveImageCard
+• InteractiveTextCard
+• InteractiveImageAndInformationCard
+• AnimatedCard
+
+BUTTONS
+• FilledPartiallyRoundedButton
+• FilledFullyRoundedButton
+• OutlinedPartiallyRoundedButton
+• OutlinedFullyRoundedButton
+
+BORDERS
+• SolidColourBorder
+• GradientColourBorder
+• AnimatedBorder
+
+TEXT
+• HeaderText
+• SubHeaderText
+• BoldText
+• RegularText
+• SmallText
+• FinePrintText
+• HyperlinkText
+
+MENUS
+• Menu
+• DropdownMenu
+• SlidingMenu
+• ContextMenu
+
+NAVIGATION
+• NavigationBar
+• FloatingNavigationBar
+• AnimatedNavigationBar
+
+FOOTER
+• Footer
+• FloatingFooter
+• AnimatedFooter
+
+MISCELLANEOUS
+• Shadow
+• Glow
+• Highlight
+• Scrollbar
+• ImageTag
+• VideoTag
+• AudioTag
