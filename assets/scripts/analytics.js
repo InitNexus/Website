@@ -1,136 +1,216 @@
 (function () {
-  const endpoint = "https://statistics.init-nexusbyte.workers.dev/";
-  const sessionId = crypto.randomUUID();
-  const visitorId = localStorage.getItem("nexus_visitor_id") || (function(){ let id = crypto.randomUUID(); localStorage.setItem("nexus_visitor_id", id); return id; })();
 
-  const data = {
-    timestamp: new Date().toISOString(),
-    userAgent: navigator.userAgent,
-    platform: navigator.platform,
-    language: navigator.language,
-    cookiesEnabled: navigator.cookieEnabled,
-    online: navigator.onLine,
-    screen: { width: screen.width, height: screen.height, pixelRatio: window.devicePixelRatio, colorDepth: screen.colorDepth },
-    viewport: { width: window.innerWidth, height: window.innerHeight },
-    battery: { charging: null, level: null },
-    connection: navigator.connection ? { type: navigator.connection.type, effectiveType: navigator.connection.effectiveType, downlink: navigator.connection.downlink, rtt: navigator.connection.rtt, saveData: navigator.connection.saveData } : null,
-    page: { url: location.href, path: location.pathname, title: document.title, referrer: document.referrer, hash: location.hash },
-    ip: null,
-    location: {},
-    browser: {},
-    os: null,
-    deviceType: null,
-    gpu: null,
-    cpuCores: navigator.hardwareConcurrency || null,
-    memoryGB: navigator.deviceMemory || null
-  };
+const endpoint = "https://statistics.init-nexusbyte.workers.dev/";
+const sessionId = crypto.randomUUID();
+const visitorId = localStorage.getItem("nexus_visitor_id") || (function(){let id=crypto.randomUUID();localStorage.setItem("nexus_visitor_id",id);return id;})();
 
-  function detectBrowser() {
-    const ua = navigator.userAgent;
-    if (/edg/i.test(ua)) { data.browser.name="Edge"; data.browser.version=ua.match(/Edg\/([0-9.]+)/)?.[1]; }
-    else if (/chrome|crios|crmo/i.test(ua)) { data.browser.name="Chrome"; data.browser.version=ua.match(/Chrome\/([0-9.]+)/)?.[1]; }
-    else if (/firefox|fxios/i.test(ua)) { data.browser.name="Firefox"; data.browser.version=ua.match(/Firefox\/([0-9.]+)/)?.[1]; }
-    else if (/safari/i.test(ua) && !/chrome/i.test(ua)) { data.browser.name="Safari"; data.browser.version=ua.match(/Version\/([0-9.]+)/)?.[1]; }
-    else { data.browser.name="Unknown"; data.browser.version="Unknown"; }
-  }
+const data = {
+timestamp:new Date().toISOString(),
+ip:null,
+isp:null,
+asn:null,
+services:null,
+decimal:null,
+proxy:null,
+vpn:null,
+tor:null,
+continent:null,
+country:null,
+region:null,
+city:null,
+postal:null,
+latitude:null,
+longitude:null,
+timezone:null,
+currency:null,
+callingCode:null,
+languages:null,
+browserName:null,
+browserVersion:null,
+userAgent:navigator.userAgent,
+os:null,
+deviceType:null,
+platform:navigator.platform,
+language:navigator.language,
+cookies:navigator.cookieEnabled,
+online:navigator.onLine,
+screenWidth:screen.width,
+screenHeight:screen.height,
+colorDepth:screen.colorDepth,
+pixelRatio:window.devicePixelRatio,
+viewportWidth:window.innerWidth,
+viewportHeight:window.innerHeight,
+cpu:navigator.hardwareConcurrency||null,
+memory:navigator.deviceMemory||null,
+gpu:null,
+batteryCharging:null,
+batteryLevel:null,
+touch:"ontouchstart" in window,
+connectionType:navigator.connection?.effectiveType||null,
+downlink:navigator.connection?.downlink||null,
+rtt:navigator.connection?.rtt||null,
+pageURL:location.href
+};
 
-  function detectOS() {
-    const ua = navigator.userAgent.toLowerCase();
-    if (/windows nt 10/.test(ua)) data.os="Windows 10";
-    else if (/mac os x/.test(ua)) data.os="Mac OS";
-    else if (/android/.test(ua)) data.os="Android";
-    else if (/iphone|ipad|ipod/.test(ua)) data.os="iOS";
-    else if (/linux/.test(ua)) data.os="Linux";
-    else data.os="Unknown";
-  }
+function detectBrowser(){
+const ua=navigator.userAgent;
+if(/edg/i.test(ua)){data.browserName="Edge";data.browserVersion=ua.match(/Edg\/([0-9.]+)/)?.[1];}
+else if(/chrome/i.test(ua)){data.browserName="Chrome";data.browserVersion=ua.match(/Chrome\/([0-9.]+)/)?.[1];}
+else if(/firefox/i.test(ua)){data.browserName="Firefox";data.browserVersion=ua.match(/Firefox\/([0-9.]+)/)?.[1];}
+else if(/safari/i.test(ua)&&!/chrome/i.test(ua)){data.browserName="Safari";data.browserVersion=ua.match(/Version\/([0-9.]+)/)?.[1];}
+else{data.browserName="Unknown";data.browserVersion="Unknown";}
+}
 
-  function detectDevice() {
-    const ua = navigator.userAgent.toLowerCase();
-    if (/mobile/.test(ua)) data.deviceType="Mobile";
-    else if (/tablet|ipad/.test(ua)) data.deviceType="Tablet";
-    else data.deviceType="Desktop";
-  }
+function detectOS(){
+const ua=navigator.userAgent.toLowerCase();
+if(ua.includes("windows"))data.os="Windows";
+else if(ua.includes("mac"))data.os="MacOS";
+else if(ua.includes("android"))data.os="Android";
+else if(ua.includes("iphone")||ua.includes("ipad"))data.os="iOS";
+else if(ua.includes("linux"))data.os="Linux";
+else data.os="Unknown";
+}
 
-  async function fetchIP() {
-    try {
-      const res = await fetch("https://ipapi.co/json/");
-      const json = await res.json();
-      data.ip = json.ip;
-      data.location = { continent: json.continent_code, country: json.country_name, region: json.region, city: json.city, postal: json.postal };
-    } catch {}
-  }
+function detectDevice(){
+const ua=navigator.userAgent.toLowerCase();
+if(/mobile/.test(ua))data.deviceType="Mobile";
+else if(/tablet|ipad/.test(ua))data.deviceType="Tablet";
+else data.deviceType="Desktop";
+}
 
-  async function detectBattery() {
-    try {
-      if (navigator.getBattery) {
-        const battery = await navigator.getBattery();
-        data.battery.charging = battery.charging;
-        data.battery.level = battery.level;
-      }
-    } catch {}
-  }
+async function detectGPU(){
+try{
+const canvas=document.createElement("canvas");
+const gl=canvas.getContext("webgl")||canvas.getContext("experimental-webgl");
+if(!gl)return;
+const dbg=gl.getExtension("WEBGL_debug_renderer_info");
+if(dbg)data.gpu=gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL);
+}catch{}
+}
 
-  async function detectGPU() {
-    try {
-      const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      if (!gl) return;
-      const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
-      if (debugInfo) data.gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-    } catch {}
-  }
+async function detectBattery(){
+try{
+if(navigator.getBattery){
+const b=await navigator.getBattery();
+data.batteryCharging=b.charging;
+data.batteryLevel=b.level;
+}
+}catch{}
+}
 
-  function buildEmbed() {
-    return {
-      username: "Website Analytics",
-      embeds: [{
-        title: "New Visitor",
-        color: 0xc4a7e7,
-        fields: [
-          { name:"IP Address", value:data.ip||"Unknown", inline:true },
-          { name:"Continent", value:data.location.continent||"Unknown", inline:true },
-          { name:"Country", value:data.location.country||"Unknown", inline:true },
-          { name:"Region", value:data.location.region||"Unknown", inline:true },
-          { name:"City", value:data.location.city||"Unknown", inline:true },
-          { name:"Postal Code", value:data.location.postal||"Unknown", inline:true },
-          { name:"Browser", value:data.browser.name+" "+data.browser.version, inline:true },
-          { name:"OS", value:data.os||"Unknown", inline:true },
-          { name:"Device Type", value:data.deviceType||"Unknown", inline:true },
-          { name:"Screen", value:data.screen.width+"x"+data.screen.height+" @ "+data.screen.pixelRatio+"x", inline:true },
-          { name:"Page URL", value:data.page.url, inline:false },
-          { name:"Session ID", value:sessionId, inline:false },
-          { name:"Visitor ID", value:visitorId, inline:false }
-        ],
-        timestamp: data.timestamp
-      }]
-    };
-  }
+async function fetchIPInfo(){
+try{
+const r=await fetch("https://ipapi.co/json/");
+const j=await r.json();
 
-  async function sendAnalytics() {
-    const payload = buildEmbed();
-    try {
-      await fetch(endpoint, {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(payload)
-      });
-    } catch {}
-  }
+data.ip=j.ip;
+data.isp=j.org;
+data.asn=j.asn;
+data.continent=j.continent_code;
+data.country=j.country_name;
+data.region=j.region;
+data.city=j.city;
+data.postal=j.postal;
+data.latitude=j.latitude;
+data.longitude=j.longitude;
+data.timezone=j.timezone;
+data.currency=j.currency;
+data.callingCode=j.country_calling_code;
+data.languages=j.languages;
 
-  async function init() {
-    detectBrowser();
-    detectOS();
-    detectDevice();
-    await fetchIP();
-    await detectBattery();
-    await detectGPU();
-    await sendAnalytics();
-  }
+}catch{}
+}
 
-  init();
+function buildEmbed(){
 
-  window.addEventListener("resize", ()=>{ data.viewport.width=window.innerWidth; data.viewport.height=window.innerHeight; });
-  window.addEventListener("online", ()=>{ data.online=true; });
-  window.addEventListener("offline", ()=>{ data.online=false; });
+const text=
+"**General Information**\n"+
+"• Website URL: "+(data.pageURL||"Unknown")+"\n"+
+"• Access Timestamp: "+data.timestamp+"\n"+
+"• Session ID: "+sessionId+"\n"+
+"• Visitor ID: "+visitorId+"\n\n"+
+
+"**Network Information**\n"+
+"• IP Address: "+(data.ip||"Unknown")+"\n"+
+"• ISP: "+(data.isp||"Unknown")+"\n"+
+"• ASN: "+(data.asn||"Unknown")+"\n"+
+"• Services: "+(data.services||"Unknown")+"\n"+
+"• Decimal Value: "+(data.decimal||"Unknown")+"\n"+
+"• Proxy Status: "+(data.proxy||"Unknown")+"\n"+
+"• VPN Status: "+(data.vpn||"Unknown")+"\n"+
+"• Tor Status: "+(data.tor||"Unknown")+"\n\n"+
+
+"**Browser Information**\n"+
+"• Browser Name: "+data.browserName+"\n"+
+"• Browser Version: "+data.browserVersion+"\n"+
+"• UserAgent: "+data.userAgent+"\n\n"+
+
+"**Device Information**\n"+
+"• Operating System: "+data.os+"\n"+
+"• Device Type: "+data.deviceType+"\n"+
+"• Platform: "+data.platform+"\n"+
+"• Language: "+data.language+"\n"+
+"• Cookies Enabled: "+data.cookies+"\n"+
+"• Online Status: "+data.online+"\n"+
+"• CPU Cores: "+(data.cpu||"Unknown")+"\n"+
+"• RAM (GB): "+(data.memory||"Unknown")+"\n"+
+"• GPU: "+(data.gpu||"Unknown")+"\n"+
+"• Touch Support: "+data.touch+"\n"+
+"• Battery Charging: "+(data.batteryCharging??"Unknown")+"\n"+
+"• Battery Level: "+(data.batteryLevel??"Unknown")+"\n"+
+"• Screen Resolution: "+data.screenWidth+"x"+data.screenHeight+"\n"+
+"• Viewport: "+data.viewportWidth+"x"+data.viewportHeight+"\n"+
+"• Pixel Ratio: "+data.pixelRatio+"\n"+
+"• Color Depth: "+data.colorDepth+"\n"+
+"• Connection Type: "+(data.connectionType||"Unknown")+"\n"+
+"• Downlink: "+(data.downlink||"Unknown")+"\n"+
+"• RTT: "+(data.rtt||"Unknown")+"\n\n"+
+
+"**Location Information**\n"+
+"• Continent: "+(data.continent||"Unknown")+"\n"+
+"• Country: "+(data.country||"Unknown")+"\n"+
+"• Region: "+(data.region||"Unknown")+"\n"+
+"• City: "+(data.city||"Unknown")+"\n"+
+"• Postal Code: "+(data.postal||"Unknown")+"\n"+
+"• Latitude: "+(data.latitude||"Unknown")+"\n"+
+"• Longitude: "+(data.longitude||"Unknown")+"\n"+
+"• Timezone: "+(data.timezone||"Unknown")+"\n"+
+"• Currency: "+(data.currency||"Unknown")+"\n"+
+"• Calling Code: "+(data.callingCode||"Unknown")+"\n"+
+"• Languages: "+(data.languages||"Unknown");
+
+return{
+username:"Website Analytics",
+embeds:[{
+title:"Visitor Log",
+description:text,
+color:0xc4a7e7,
+timestamp:data.timestamp
+}]
+};
+
+}
+
+async function send(){
+try{
+await fetch(endpoint,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(buildEmbed())
+});
+}catch{}
+}
+
+async function init(){
+detectBrowser();
+detectOS();
+detectDevice();
+await fetchIPInfo();
+await detectGPU();
+await detectBattery();
+await send();
+}
+
+init();
 
 })();
