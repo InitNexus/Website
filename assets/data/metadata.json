@@ -1,0 +1,14 @@
+{
+  "website": {
+    "name": "NexusByte Initiative",
+    "url": "https://initnexus.github.io/Website",
+    "author": "Vendetta Developer",
+    "organisation": "NexusByte Initiative",
+    "creation_timestamp": "13/03/2026, 04:28:50AM EST",
+    "host_provider": "GitHub",
+    "includes_css": true,
+    "includes_js": true,
+    "sitemap_path": "https://initnexus.github.io/Website/assets/data/sitemap.json",
+    "default_theme": "dark"
+  }
+}
