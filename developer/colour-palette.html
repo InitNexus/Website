@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colour Palette</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: #141414;
+        font-family: Arial, sans-serif;
+    }
+
+    .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(30, 30, 30, 0.8);
+        backdrop-filter: blur(8px);
+        border-bottom: 2px solid #ff4c4c;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ff4c4c;
+        font-weight: bold;
+        z-index: 1000;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 20px 50px 20px;
+        min-height: 100%;
+        box-sizing: border-box;
+    }
+
+    .palette {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #ff4c4c;
+    }
+
+    .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 2px solid #ff4c4c;
+        color: #ff4c4c;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .bar:hover {
+        transform: scale(1.02);
+    }
+
+    button.copy-btn {
+        background-color: transparent;
+        border: 2px solid #ff4c4c;
+        color: #ff4c4c;
+        padding: 5px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button.copy-btn:hover {
+        background-color: #ff4c4c22;
+    }
+
+    @media (max-width: 500px) {
+        .bar {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+        button.copy-btn {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+    Colour Palette
+</div>
+
+<div class="container">
+    <div class="palette">
+        <div class="bar" style="background-color:#11111b;">
+            <span>#11111b</span>
+            <button class="copy-btn" onclick="copyHex('#11111b')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#181825;">
+            <span>#181825</span>
+            <button class="copy-btn" onclick="copyHex('#181825')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#1e1e2e;">
+            <span>#1e1e2e</span>
+            <button class="copy-btn" onclick="copyHex('#1e1e2e')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#272736;">
+            <span>#272736</span>
+            <button class="copy-btn" onclick="copyHex('#272736')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#403952;">
+            <span>#403952</span>
+            <button class="copy-btn" onclick="copyHex('#403952')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#4f5264;">
+            <span>#4f5264</span>
+            <button class="copy-btn" onclick="copyHex('#4f5264')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#313244;">
+            <span>#313244</span>
+            <button class="copy-btn" onclick="copyHex('#313244')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#8c92aa;">
+            <span>#8c92aa</span>
+            <button class="copy-btn" onclick="copyHex('#8c92aa')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#b9c0d9;">
+            <span>#b9c0d9</span>
+            <button class="copy-btn" onclick="copyHex('#b9c0d9')">Copy</button>
+        </div>
+        <div class="bar" style="background-color:#c4a7e7;">
+            <span>#c4a7e7</span>
+            <button class="copy-btn" onclick="copyHex('#c4a7e7')">Copy</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyHex(hex) {
+    navigator.clipboard.writeText(hex).then(() => {
+        alert(hex + " copied to clipboard!");
+    });
+}
+</script>
+
+</body>
+</html>
