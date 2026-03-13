@@ -1,18 +1,18 @@
 DEFAULT (DARK) THEME
-• Background Colour:
-• Main Body Colour:
-• Secondary Body Colour:
-• Navigation Colour:
-• Footer Colour:
-• Card Colour:
-• Bar Colour:
-• Input Bar Colour:
-• Menus Colour:
-• Button Colour:
-• Border Colour:
-• Highlight Colour:
-• Scrollbar Colour:
-• Icon Colour:
+• Background Colour: #11111b
+• Main Body Colour: #181825
+• Secondary Body Colour: #1e1e2e
+• Navigation Colour: #272736
+• Footer Colour: #272736
+• Card Colour: #4f5264
+• Bar Colour: #4f5264
+• Input Bar Colour: #4f5264
+• Menus Colour: #403952
+• Button Colour: #8c92aa
+• Border Colour: #b9c0d9
+• Highlight Colour: #313244
+• Scrollbar Colour: #c4a7e7
+• Icon Colour: #c4a7e7
 
 LIGHT THEME
 • Background Colour:
