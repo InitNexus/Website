@@ -4,13 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Please Wait...</title>
-<link rel="icon" href="https://initnexus.github.io/Website/assets/media/branding/favicon.ico">
-<link rel="stylesheet" href="https://initnexus.github.io/Website/assets/styling/user-experience.css">
+<link rel="icon" href="#">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+  }
+
+  body {
+    background-color: #11111b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .loader {
+    width: 100px;
+    height: 100px;
+  }
+
+  .loader circle {
+    fill: none;
+    stroke: #8c92aa;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: spin 1.5s linear infinite, dash 1.5s ease-in-out infinite;
+    transform-origin: 50% 50%;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes dash {
+    0% { stroke-dashoffset: 150; }
+    50% { stroke-dashoffset: 37.5; }
+    100% { stroke-dashoffset: 150; }
+  }
+
+  h3 {
+    font-size: 24px;
+    color: #c4a7e7;
+  }
+
+  p {
+    font-size: 16px;
+    color: #ffffff;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #b9c0d9;
+  }
+
+  @media (max-width: 480px) {
+    .loader {
+      width: 70px;
+      height: 70px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+</style>
 </head>
 <body>
 
-<script src="https://initnexus.github.io/Website/assets/scripts/analytics.js"></script>
-<script src="https://initnexus.github.io/Website/assets/scripts/debugging.js"></script>
+<div class="loader-container">
+  <svg class="loader" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45"></circle>
+  </svg>
+  <h3>Please wait</h3>
+  <p>Verifying you are human...</p>
+</div>
+
+<footer>
+  &copy; NexusByte Initiative 2026. All Rights Reserved.
+</footer>
+
+<script>
+  setTimeout(() => {
+    window.location.href = "https://initnexus.github.io/Website/main/home.html";
+  }, 3000);
+</script>
 
 </body>
 </html>
