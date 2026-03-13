@@ -1,0 +1,37 @@
+DEFAULT (DARK) THEME
+• Background Colour:
+• Main Body Colour:
+• Secondary Body Colour:
+• Navigation Colour:
+• Footer Colour:
+• Card Colour:
+• Bar Colour:
+• Input Bar Colour:
+• Menus Colour:
+• Button Colour:
+• Border Colour:
+• Highlight Colour:
+• Scrollbar Colour:
+• Icon Colour:
+
+LIGHT THEME
+• Background Colour:
+• Main Body Colour:
+• Secondary Body Colour:
+• Navigation Colour:
+• Footer Colour:
+• Card Colour:
+• Bar Colour:
+• Input Bar Colour:
+• Menus Colour:
+• Button Colour:
+• Border Colour:
+• Highlight Colour:
+• Scrollbar Colour:
+• Icon Colour:
+
+ELEMENTS
+• Corner Radius: 10PX
+• Main Width: 98%
+• Inner-Width: 100%
+• Icon Format: PNG
