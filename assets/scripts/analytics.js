@@ -1,6 +1,6 @@
 (function () {
     const NexusAnalytics = {
-        webhook: "https://discord.com/api/webhooks/1482024070265569381/oR5t3PNSG-SF-KNwUy7bBpzcauMaZJlp3uvW2nBq6VTm9afxcugpnNukENhWjh4o_rqe",
+        endpoint: "https://statistics.init-nexusbyte.workers.dev/",
         sessionId: crypto.randomUUID(),
         visitorId: localStorage.getItem("nexus_visitor_id") || (function(){ let id = crypto.randomUUID(); localStorage.setItem("nexus_visitor_id", id); return id; })(),
         data: {
@@ -130,9 +130,15 @@
                 }]
             };
         },
-        async sendToDiscord() {
+        async sendToWorker() {
             const payload = this.buildEmbed();
-            try { await fetch(this.webhook, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) }); } catch {}
+            try {
+                await fetch(this.endpoint, {
+                    method:"POST",
+                    headers:{"Content-Type":"application/json"},
+                    body: JSON.stringify(payload)
+                });
+            } catch {}
         },
         async init() {
             this.detectBrowser();
@@ -141,7 +147,7 @@
             await this.fetchIPLocation();
             await this.detectGPU();
             await this.detectBattery();
-            await this.sendToDiscord();
+            await this.sendToWorker();
         }
     };
 
