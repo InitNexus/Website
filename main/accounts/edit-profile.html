@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile</title>
+  <link rel="icon" href="https://initnexus.github.io/Website/assets/media/branding/circular-logo.png" />
+  <link rel="stylesheet" href="https://initnexus.github.io/Website/assets/core/styling.css" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(124,106,255,0.55) transparent;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; background: transparent; }
+    ::-webkit-scrollbar-track { background: transparent; border: none; box-shadow: none; }
+    ::-webkit-scrollbar-thumb { background: rgba(124,106,255,0.55); border-radius: 999px; border: none; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(176,79,255,0.75); }
+    ::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+    ::-webkit-scrollbar-corner { background: transparent; }
+
+    .menu-list { scrollbar-width: thin; scrollbar-color: rgba(124,106,255,0.5) transparent; }
+    .menu-list::-webkit-scrollbar { width: 4px; background: transparent; }
+    .menu-list::-webkit-scrollbar-track { background: transparent; margin-top: 10px; margin-bottom: 10px; }
+    .menu-list::-webkit-scrollbar-thumb { background: rgba(124,106,255,0.5); border-radius: 999px; }
+    .menu-list::-webkit-scrollbar-thumb:hover { background: rgba(176,79,255,0.72); }
+    .menu-list::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 10%,  rgba(80,40,180,0.40) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 85% 88%,  rgba(140,40,220,0.32) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 58% 42%,  rgba(50,20,120,0.28) 0%, transparent 70%),
+        linear-gradient(160deg, #0c0718 0%, #110a24 40%, #0d0820 100%);
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.16;
+      pointer-events: none;
+      animation: drift linear infinite;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #7c6aff; top: -100px; left: -80px; animation-duration: 30s; }
+    .orb-2 { width: 360px; height: 360px; background: #b04fff; bottom: -80px; right: -60px; animation-duration: 24s; animation-direction: reverse; }
+    .orb-3 { width: 240px; height: 240px; background: #4cffb4; top: 42%; left: 58%; animation-duration: 36s; animation-delay: -12s; }
+
+    @keyframes drift {
+      0%   { transform: translate(0,0)       rotate(0deg);   }
+      33%  { transform: translate(40px,-28px) rotate(120deg); }
+      66%  { transform: translate(-28px,18px) rotate(240deg); }
+      100% { transform: translate(0,0)       rotate(360deg); }
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      opacity: 0.03;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .page-content {
+      flex: 1;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(8,4,20,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .menu-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .navbar {
+      width: 98%;
+      margin: 12px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 58px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.07);
+      transition: box-shadow 0.3s ease;
+    }
+    .navbar.scrolled {
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+    .navbar-brand {
+      font-family: 'Syne', 'Segoe UI', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      background: linear-gradient(120deg, #c8b8ff, #f0e8ff 50%, #b04fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      user-select: none;
+    }
+    .navbar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-icon-btn {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+      visibility: visible !important;
+      opacity: 1 !important;
+      overflow: visible !important;
+    }
+    .nav-icon-btn:hover { background: rgba(124,106,255,0.15); }
+    .nav-icon-btn img {
+      width: 22px !important;
+      height: 22px !important;
+      min-width: 22px !important;
+      min-height: 22px !important;
+      object-fit: contain;
+      border-radius: 0 !important;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      flex-shrink: 0;
+    }
+
+    .slide-menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      max-height: 80vh;
+      background: rgba(18,10,38,0.97);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid rgba(124,106,255,0.18);
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 -12px 60px rgba(0,0,0,0.55);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .slide-menu.open { transform: translateY(0); }
+
+    .menu-handle-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 0 6px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .menu-handle {
+      width: 48px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(180,160,255,0.35);
+      transition: background 0.2s ease;
+    }
+    .menu-handle-wrap:hover .menu-handle { background: rgba(180,160,255,0.65); }
+
+    .menu-list {
+      overflow-y: auto;
+      padding: 8px 6px 24px 0;
+      flex: 1;
+    }
+    .menu-group { width: 100%; }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 98%;
+      margin: 0 auto;
+      padding: 13px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #d4c4f4;
+      font-family: 'Syne', 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.18s ease, color 0.18s ease;
+      position: relative;
+    }
+    .menu-item:hover { background: rgba(124,106,255,0.14); color: #f0e8ff; }
+    .menu-item img.menu-item-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 0;
+      display: block;
+    }
+    .menu-item-label { flex: 1; }
+    .menu-item-chevron {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 0;
+      display: block;
+      opacity: 0.5;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    .menu-item:hover .menu-item-chevron { opacity: 0.85; }
+    .menu-group.open .menu-item .menu-item-chevron { transform: rotate(90deg); opacity: 0.85; }
+    .menu-sub {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .menu-group.open .menu-sub { max-height: 600px; }
+    .menu-sub-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 98%;
+      margin: 0 auto;
+      padding: 10px 16px 10px 50px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #b8a8d8;
+      font-family: 'Syne', 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    .menu-sub-item:hover { background: rgba(124,106,255,0.14); color: #f0e8ff; }
+    .menu-sub-item img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 0;
+      display: block;
+    }
+
+    .footer {
+      width: 98%;
+      margin: 24px auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 52px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+      flex-shrink: 0;
+    }
+    .footer-copy {
+      font-family: 'Syne', 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: rgba(180,160,255,0.5);
+      white-space: nowrap;
+    }
+    .footer-icons { display: flex; align-items: center; gap: 4px; }
+    .footer-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .footer-icon-btn:hover { background: rgba(124,106,255,0.15); }
+    .footer-icon-btn img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      border-radius: 0;
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grain"></div>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <nav class="slide-menu" id="slideMenu" aria-label="Site navigation menu">
+    <div class="menu-handle-wrap" id="menuClose" role="button" aria-label="Close menu" tabindex="0">
+      <div class="menu-handle"></div>
+    </div>
+    <div class="menu-list">
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/projects.png" alt="" />
+          <span class="menu-item-label">Projects</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/projects/applications.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/applications.png" alt="" /><span>Applications</span></a>
+          <a href="https://initnexus.github.io/Website/main/projects/nexusbyte-modifications.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-modifications.png" alt="" /><span>NexusByte Modifications</span></a>
+          <a href="https://initnexus.github.io/Website/main/projects/discord-bots.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/discord-bots.png" alt="" /><span>Discord Bots</span></a>
+          <a href="https://initnexus.github.io/Website/main/projects/python-scripts.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/python-scripts.png" alt="" /><span>Python Scripts</span></a>
+          <a href="https://initnexus.github.io/Website/main/projects/miscellaneous-projects.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/miscellaneous.png" alt="" /><span>Miscellaneous Projects</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/content.png" alt="" />
+          <span class="menu-item-label">Content</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/content/playstation/playstation3.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/playstation.png" alt="" /><span>PlayStation</span></a>
+          <a href="https://initnexus.github.io/Website/main/content/icons.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/icons.png" alt="" /><span>Icons</span></a>
+          <a href="https://initnexus.github.io/Website/main/content/wallpapers.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/wallpapers.png" alt="" /><span>Wallpapers</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/store.png" alt="" />
+          <span class="menu-item-label">Store</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/store/software/explore-software.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/software.png" alt="" /><span>Software</span></a>
+          <a href="https://initnexus.github.io/Website/main/store/hardware/explore-hardware.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/hardware.png" alt="" /><span>Hardware</span></a>
+          <a href="https://initnexus.github.io/Website/main/store/services/explore-services.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/services.png" alt="" /><span>Services</span></a>
+          <a href="https://initnexus.github.io/Website/main/store/subscriptions/explore-subscriptions.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/subscriptions.png" alt="" /><span>Subscriptions</span></a>
+          <a href="https://initnexus.github.io/Website/main/store/virtual-currencies.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/virtual-currencies.png" alt="" /><span>Virtual Currencies</span></a>
+          <a href="https://initnexus.github.io/Website/main/store/consumables/explore-consumables.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/consumables.png" alt="" /><span>Consumables</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/blogs.png" alt="" />
+          <span class="menu-item-label">Blogs</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/blogs/personal.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/personal-blog.png" alt="" /><span>Personal</span></a>
+          <a href="https://initnexus.github.io/Website/main/blogs/company.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/company-blog.png" alt="" /><span>Company</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-tools.png" alt="" />
+          <span class="menu-item-label">NexusByte Tools</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/image-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/image-tools.png" alt="" /><span>Image Tools</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/video-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/video-tools.png" alt="" /><span>Video Tools</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/audio-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/audio-tools.png" alt="" /><span>Audio Tools</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/document-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/document-tools.png" alt="" /><span>Document Tools</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/network-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/network-tools.png" alt="" /><span>Network Tools</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/research-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/research-tools.png" alt="" /><span>Research Tools</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-tools/miscellaneous-tools.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/miscellaneous.png" alt="" /><span>Miscellaneous Tools</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-ai.png" alt="" />
+          <span class="menu-item-label">NexusByte AI</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-ai/chat.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/ai-chat.png" alt="" /><span>Chat</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-ai/models.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/ai-models.png" alt="" /><span>Models</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-music.png" alt="" />
+          <span class="menu-item-label">NexusByte Music</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-music/nexusbyte-originals.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-music.png" alt="" /><span>NexusByte Originals</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-music/nexusbyte-instrumentals.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-music.png" alt="" /><span>NexusByte Instrumentals</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-music/nexusbyte-remixes.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-music.png" alt="" /><span>NexusByte Remixes</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-music/community.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/music-community.png" alt="" /><span>Community</span></a>
+          <a href="https://initnexus.github.io/Website/main/nexusbyte-music/submission.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/music-submission.png" alt="" /><span>Submission</span></a>
+        </div>
+      </div>
+
+      <a href="https://initnexus.github.io/Website/main/nexusbyte-chat/global-chat.html" class="menu-item">
+        <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-chat.png" alt="" />
+        <span class="menu-item-label">NexusByte Chat</span>
+      </a>
+
+      <a href="https://initnexus.github.io/Website/main/nexusbyte-application.html" class="menu-item">
+        <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/nexusbyte-application.png" alt="" />
+        <span class="menu-item-label">NexusByte Application</span>
+      </a>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/information.png" alt="" />
+          <span class="menu-item-label">Information</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/information/explore-information.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/documentation.png" alt="" /><span>Documentation</span></a>
+          <a href="https://initnexus.github.io/Website/main/information/contact.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/contact.png" alt="" /><span>Contact</span></a>
+          <a href="https://initnexus.github.io/Website/main/information/our-team.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/our-team.png" alt="" /><span>Our Team</span></a>
+          <a href="https://initnexus.github.io/Website/main/information/technology-we-use.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/technology-we-use.png" alt="" /><span>Technology We Use</span></a>
+          <a href="https://initnexus.github.io/Website/main/information/social-media.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/social-media.png" alt="" /><span>Social Media</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/miscellaneous.png" alt="" />
+          <span class="menu-item-label">Miscellaneous</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/miscellaneous/useful-links.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/useful-links.png" alt="" /><span>Useful Links</span></a>
+          <a href="https://initnexus.github.io/Website/main/miscellaneous/data-breaches.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/data-breaches.png" alt="" /><span>Data Breaches</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <div class="menu-item" data-toggle>
+          <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/accounts.png" alt="" />
+          <span class="menu-item-label">Accounts</span>
+          <img class="menu-item-chevron" src="https://initnexus.github.io/Website/assets/media/icons/dropdown-arrow.png" alt="" />
+        </div>
+        <div class="menu-sub">
+          <a href="https://initnexus.github.io/Website/main/accounts/login.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/login.png" alt="" /><span>Login</span></a>
+          <a href="https://initnexus.github.io/Website/main/accounts/sign-up.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/sign-up.png" alt="" /><span>Sign Up</span></a>
+          <a href="https://initnexus.github.io/Website/main/accounts/account.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/account.png" alt="" /><span>Account</span></a>
+          <a href="https://initnexus.github.io/Website/main/accounts/profile.html" class="menu-sub-item"><img src="https://initnexus.github.io/Website/assets/media/icons/profile.png" alt="" /><span>Profile</span></a>
+        </div>
+      </div>
+
+      <a href="https://initnexus.github.io/Website/main/settings.html" class="menu-item">
+        <img class="menu-item-icon" src="https://initnexus.github.io/Website/assets/media/icons/settings.png" alt="" />
+        <span class="menu-item-label">Settings</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <header>
+      <nav class="navbar" id="navbar">
+        <a href="https://initnexus.github.io/Website/main/home.html" class="navbar-brand">NexusByte</a>
+        <div class="navbar-icons">
+          <a href="https://initnexus.github.io/Website/main/home.html" class="nav-icon-btn" aria-label="Home">
+            <img src="https://initnexus.github.io/Website/assets/media/icons/home.png" alt="Home" />
+          </a>
+          <a href="https://initnexus.github.io/Website/main/search.html" class="nav-icon-btn" aria-label="Search">
+            <img src="https://initnexus.github.io/Website/assets/media/icons/search.png" alt="Search" />
+          </a>
+          <button class="nav-icon-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" style="display:inline-flex!important;visibility:visible!important;opacity:1!important;">
+            <img src="https://initnexus.github.io/Website/assets/media/icons/menu.png" alt="Menu" style="display:block!important;visibility:visible!important;opacity:1!important;width:22px!important;height:22px!important;border-radius:0!important;" />
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page-content">
+    </main>
+
+    <footer class="footer">
+      <span class="footer-copy">&copy; NexusByte Initiative 2026. All Rights Reserved.</span>
+      <div class="footer-icons">
+        <a href="https://instagram.com/@init.nexusbyte" class="footer-icon-btn" aria-label="Instagram" target="_blank" rel="noopener">
+          <img src="https://initnexus.github.io/Website/assets/media/icons/instagram.png" alt="Instagram" />
+        </a>
+        <a href="https://tiktok.com/@init.nexusbyte" class="footer-icon-btn" aria-label="TikTok" target="_blank" rel="noopener">
+          <img src="https://initnexus.github.io/Website/assets/media/icons/tiktok.png" alt="TikTok" />
+        </a>
+        <a href="https://github.com/initnexus" class="footer-icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
+          <img src="https://initnexus.github.io/Website/assets/media/icons/github.png" alt="GitHub" />
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://initnexus.github.io/Website/assets/core/script.js"></script>
+  <script>
+    const menuToggle  = document.getElementById('menuToggle');
+    const slideMenu   = document.getElementById('slideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuClose   = document.getElementById('menuClose');
+
+    function openMenu() {
+      slideMenu.classList.add('open');
+      menuOverlay.classList.add('active');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      slideMenu.classList.remove('open');
+      menuOverlay.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    menuClose.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); closeMenu(); }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    document.querySelectorAll('[data-group]').forEach(function(group) {
+      var toggle = group.querySelector('[data-toggle]');
+      if (!toggle) return;
+      toggle.addEventListener('click', function() {
+        group.classList.toggle('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
