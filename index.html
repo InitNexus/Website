@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusByte Initiative</title>
+  <link rel="icon" href="https://initnexus.github.io/Website/assets/media/branding/circular-logo.png" />
+  <link rel="stylesheet" href="https://initnexus.github.io/Website/assets/core/styling.css" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preloader-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .spinner-ring {
+      animation: spin 1.2s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+      display: block;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .preloader-heading {
+      margin: 0;
+    }
+
+    .preloader-text {
+      margin: 0;
+    }
+
+    .preloader-copyright {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preloader-center">
+
+    <svg class="spinner-ring" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle
+        cx="36" cy="36" r="28"
+        stroke="rgba(124,106,255,0.15)"
+        stroke-width="5"
+        fill="none"
+      />
+      <path
+        d="M 36 8 A 28 28 0 1 1 35.99 8"
+        stroke="url(#spinnerGrad)"
+        stroke-width="5"
+        stroke-linecap="round"
+        fill="none"
+        stroke-dasharray="140 36"
+      />
+      <defs>
+        <linearGradient id="spinnerGrad" x1="72" y1="36" x2="0" y2="36" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#b04fff" />
+          <stop offset="100%" stop-color="#7c6aff" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <h3 class="preloader-heading">Please wait</h3>
+    <p class="preloader-text">Checking you are human...</p>
+
+  </div>
+
+  <small class="preloader-copyright">&copy; NexusByte Initiative 2026. All Rights Reserved.</small>
+
+  <script src="https://initnexus.github.io/Website/assets/core/script.js"></script>
+  <script>
+    setTimeout(function () {
+      window.location.href = 'https://initnexus.github.io/Website/main/home.html';
+    }, 3000);
+  </script>
+
+</body>
+</html>
