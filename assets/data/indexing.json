@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Home",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/home.png",
+    "url": "https://initnexus.github.io/Website/main/home.html"
+  },
+  {
+    "name": "Search",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/search.png",
+    "url": "https://initnexus.github.io/Website/main/search.html"
+  },
+  {
+    "name": "Projects",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/projects.png",
+    "url": "https://initnexus.github.io/Website/main/projects/applications.html"
+  },
+  {
+    "name": "Content",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/content.png",
+    "url": "https://initnexus.github.io/Website/main/content/icons.html"
+  },
+  {
+    "name": "Store",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/store.png",
+    "url": "https://initnexus.github.io/Website/main/store/services/explore-services.html"
+  },
+  {
+    "name": "Blogs",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/blogs.png",
+    "url": "https://initnexus.github.io/Website/main/blogs/company-blog.html"
+  },
+  {
+    "name": "NexusByte Tools",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/nexusbyte-tools.png",
+    "url": "https://initnexus.github.io/Website/main/nexusbyte-tools/miscellaneous-tools.html"
+  },
+  {
+    "name": "NexusByte AI",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/nexusbyte-ai.png",
+    "url": "https://initnexus.github.io/Website/main/nexusbyte-ai/chat.html"
+  },
+  {
+    "name": "NexusByte Music",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/nexusbyte-music.png",
+    "url": "https://initnexus.github.io/Website/main/nexusbyte-music/community.html"
+  },
+  {
+    "name": "NexusByte Chat",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/nexusbyte-chat.png",
+    "url": "https://initnexus.github.io/Website/main/nexusbyte-chat/global-chat.html"
+  },
+  {
+    "name": "NexusByte Application",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/nexusbyte-application.png",
+    "url": "https://initnexus.github.io/Website/main/nexusbyte-application.html"
+  },
+  {
+    "name": "Information",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/information.png",
+    "url": "https://initnexus.github.io/Website/main/information/explore-information.html"
+  },
+  {
+    "name": "Miscellaneous",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/miscellaneous.png",
+    "url": "https://initnexus.github.io/Website/main/miscellaneous/useful-links.html"
+  },
+  {
+    "name": "Accounts",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/accounts.png",
+    "url": "https://initnexus.github.io/Website/main/accounts/login.html"
+  },
+  {
+    "name": "Settings",
+    "icon": "https://initnexus.github.io/Website/assets/media/icons/settings.png",
+    "url": "https://initnexus.github.io/Website/main/settings.html"
+  }
+]
